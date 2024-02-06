@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<svg width="375" height="374.9999" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" version="1.0">
+ <defs>
+  <path clip-rule="nonzero" d="m26.54,22.5l330,0l0,330l-330,0l0,-330zm0,0" fill="blue" id="pathAttribute"/>
+ </defs>
+ <g class="layer">
+  <title>Layer 1</title>
+  <g id="svg_5">
+   <path d="m191.54,22.5c-91.02,0 -165,74.05 -165,165c0,91.02 73.98,165 165,165c90.95,0 165,-73.98 165,-165c0,-90.95 -74.05,-165 -165,-165zm0,317.13c-83.89,0 -152.13,-68.24 -152.13,-152.13c0,-83.89 68.24,-152.13 152.13,-152.13c83.89,0 152.13,68.24 152.13,152.13c0,83.89 -68.24,152.13 -152.13,152.13zm0,0" fill="#000000" fill-rule="nonzero" id="svg_1"/>
+  </g>
+  <path d="m191.54,43.95c-79.13,0 -143.55,64.42 -143.55,143.55c0,79.13 64.42,143.55 143.55,143.55c79.13,0 143.55,-64.42 143.55,-143.55c0,-79.13 -64.42,-143.55 -143.55,-143.55zm0,0" fill="#88db08" fill-rule="nonzero" id="svg_2"/>
+ </g>
+</svg>
