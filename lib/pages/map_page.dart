@@ -1,13 +1,12 @@
 import 'dart:math';
+import 'dart:ui'
+    as ui; // imported as ui to prevent conflict between ui.Image and the Image widget
 
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart' as googleMap;
 import 'package:location/location.dart';
-import 'dart:ui'
-    as ui; // imported as ui to prevent conflict between ui.Image and the Image widget
-import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:maps_toolkit/maps_toolkit.dart' as mapTool;
 
 class MapPage extends StatefulWidget {
@@ -25,6 +24,8 @@ class _MapPageState extends State<MapPage> {
       googleMap.LatLng(18.805316075802878, 98.95043909327538);
   static const googleMap.LatLng _pEnd = googleMap.LatLng(18.8039, 98.9523);
 
+  mapTool.LatLng? prevLocation;
+
   PolylinePoints polylinePoints = PolylinePoints();
   googleMap.LatLng? currentLocation;
 
@@ -33,8 +34,10 @@ class _MapPageState extends State<MapPage> {
   googleMap.BitmapDescriptor? currentMarker;
   List<googleMap.LatLng>? polylinePointsList;
   bool isOnPath = false;
+  bool prevIsOnPath = false;
 
   Map<googleMap.PolylineId, googleMap.Polyline> polylines = {};
+  num _totalDistance = 0;
 
   @override
   void initState() {
@@ -55,42 +58,44 @@ class _MapPageState extends State<MapPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          body: currentLocation == null
-              ? const Center(
-                  child: CircularProgressIndicator(),
-                )
-              : Column(
-                  children: [
-                    Text(isOnPath.toString()),
-                    Expanded(
-                      child: googleMap.GoogleMap(
-                        initialCameraPosition: googleMap.CameraPosition(
-                          target: _pMor,
-                          zoom: 15,
-                        ),
-                        markers: {
-                          googleMap.Marker(
-                            markerId: googleMap.MarkerId("_currentLocation"),
-                            icon: currentMarker!,
-                            position: currentLocation!,
-                          ),
-                          googleMap.Marker(
-                            markerId: googleMap.MarkerId("_sourceLocation"),
-                            icon: startMarker!,
-                            position: _pStart,
-                          ),
-                          googleMap.Marker(
-                            markerId:
-                                googleMap.MarkerId("_destinationLocation"),
-                            icon: endMarker!,
-                            position: _pEnd,
-                          )
-                        },
-                        polylines: Set<googleMap.Polyline>.of(polylines.values),
+        body: currentLocation == null
+            ? const Center(
+                child: CircularProgressIndicator(),
+              )
+            : Column(
+                children: [
+                  Text(isOnPath
+                      ? 'Total Distance: ${_totalDistance.toString()}'
+                      : "You're not on the route right now, Get back to it!"),
+                  Expanded(
+                    child: googleMap.GoogleMap(
+                      initialCameraPosition: googleMap.CameraPosition(
+                        target: _pMor,
+                        zoom: 15,
                       ),
+                      markers: {
+                        googleMap.Marker(
+                          markerId: googleMap.MarkerId("_currentLocation"),
+                          icon: currentMarker!,
+                          position: currentLocation!,
+                        ),
+                        googleMap.Marker(
+                          markerId: googleMap.MarkerId("_sourceLocation"),
+                          icon: startMarker!,
+                          position: _pStart,
+                        ),
+                        googleMap.Marker(
+                          markerId: googleMap.MarkerId("_destinationLocation"),
+                          icon: endMarker!,
+                          position: _pEnd,
+                        )
+                      },
+                      polylines: Set<googleMap.Polyline>.of(polylines.values),
                     ),
-                  ],
-                )),
+                  ),
+                ],
+              ),
+      ),
     );
   }
 
@@ -120,15 +125,30 @@ class _MapPageState extends State<MapPage> {
         setState(() {
           this.currentLocation = googleMap.LatLng(
               currentLocation.latitude!, currentLocation.longitude!);
-          print(this.currentLocation);
+          // print(this.currentLocation);
           isOnPath = mapTool.PolygonUtil.isLocationOnPath(
             mapTool.LatLng(
                 currentLocation.latitude!, currentLocation.longitude!),
-            convertToMapToolLatLng(polylinePointsList!),
+            convertToMapToolLatLng(
+              polylinePointsList!,
+            ),
             false,
             tolerance: 10,
           );
-          print(isOnPath);
+
+          if (isOnPath && prevIsOnPath) {
+            num distanceBetween = mapTool.SphericalUtil.computeDistanceBetween(
+              mapTool.LatLng(
+                  currentLocation.latitude!, currentLocation.longitude!),
+              prevLocation!,
+            );
+            _totalDistance += distanceBetween;
+          }
+          prevIsOnPath = isOnPath;
+          prevLocation = mapTool.LatLng(
+            currentLocation.latitude!,
+            currentLocation.longitude!,
+          );
         });
       }
     });
@@ -165,7 +185,7 @@ class _MapPageState extends State<MapPage> {
 
   Future<googleMap.BitmapDescriptor> _bitmapDescriptorFromSvgAsset(
     String assetName, [
-    Size size = const Size(12, 12),
+    Size size = const Size(15, 15),
   ]) async {
     final pictureInfo = await vg.loadPicture(SvgAssetLoader(assetName), null);
 
