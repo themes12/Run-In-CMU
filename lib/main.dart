@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:runinmor/pages/map_page.dart';
+import 'package:provider/provider.dart';
+import 'package:runinmor/provider/navigation_bar_provider.dart';
+import 'package:runinmor/route/route.dart';
+import 'package:runinmor/theme/theme.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,13 +13,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'วื่งในมอ',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => NavigationBarProvider()),
+      ],
+      child: SafeArea(
+        child: MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          title: 'RunNaiMor',
+          routerConfig: router,
+          theme: buildTheme(),
+        ),
       ),
-      home: const MapPage(),
     );
   }
 }

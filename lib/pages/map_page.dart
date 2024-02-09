@@ -55,6 +55,12 @@ class _MapPageState extends State<MapPage> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
@@ -69,23 +75,25 @@ class _MapPageState extends State<MapPage> {
                       : "You're not on the route right now, Get back to it!"),
                   Expanded(
                     child: googleMap.GoogleMap(
-                      initialCameraPosition: googleMap.CameraPosition(
+                      initialCameraPosition: const googleMap.CameraPosition(
                         target: _pMor,
                         zoom: 15,
                       ),
                       markers: {
                         googleMap.Marker(
-                          markerId: googleMap.MarkerId("_currentLocation"),
+                          markerId:
+                              const googleMap.MarkerId("_currentLocation"),
                           icon: currentMarker!,
                           position: currentLocation!,
                         ),
                         googleMap.Marker(
-                          markerId: googleMap.MarkerId("_sourceLocation"),
+                          markerId: const googleMap.MarkerId("_sourceLocation"),
                           icon: startMarker!,
                           position: _pStart,
                         ),
                         googleMap.Marker(
-                          markerId: googleMap.MarkerId("_destinationLocation"),
+                          markerId:
+                              const googleMap.MarkerId("_destinationLocation"),
                           icon: endMarker!,
                           position: _pEnd,
                         )

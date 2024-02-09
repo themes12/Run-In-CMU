@@ -40,6 +40,11 @@ dependencies:
   flutter_polyline_points:
   flutter_svg: ^2.0.9
   maps_toolkit: ^3.0.0
+  go_router:
+  google_fonts:
+  line_icons:
+  uicons: ^1.0.1
+  provider: ^6.1.1
 
 dev_dependencies:
   flutter_test:
