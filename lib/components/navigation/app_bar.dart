@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import 'package:uicons/uicons.dart';
+
+import '../../provider/navigation_bar_provider.dart';
 
 class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
   const AppBarCustom({super.key, this.backRoute});
@@ -8,13 +11,14 @@ class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final navigation = Provider.of<NavigationBarProvider>(context);
     return AppBar(
       centerTitle: true,
       backgroundColor: const Color(0xFF714DA5),
       leading: backRoute != null
           ? IconButton(
               onPressed: () {
-                context.go(backRoute!);
+                navigation.changePage(context, 0);
               },
               icon: Icon(
                 UIcons.regularRounded.angle_left,

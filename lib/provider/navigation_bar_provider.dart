@@ -13,7 +13,8 @@ class NavigationBarProvider extends ChangeNotifier {
     if (index == 0) {
       context.goNamed('Home');
     } else if (index == 1) {
-      context.goNamed('Map', queryParameters: {'backRoute': '/'});
+      context.goNamed('RouteList');
+      // context.goNamed('RouteList', queryParameters: {'backRoute': '/'}); // with back button
     } else {
       _currentPageIndex = 0;
       context.go('/404');

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:runinmor/provider/navigation_bar_provider.dart';
-import 'package:runinmor/route/route.dart';
+import 'package:runinmor/routes/route.dart';
 import 'package:runinmor/theme/theme.dart';
 
 void main() {
@@ -18,11 +19,16 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => NavigationBarProvider()),
       ],
       child: SafeArea(
-        child: MaterialApp.router(
-          debugShowCheckedModeBanner: false,
-          title: 'RunNaiMor',
-          routerConfig: router,
-          theme: buildTheme(),
+        child: AnnotatedRegion(
+          value: const SystemUiOverlayStyle(
+            statusBarColor: Color(0xFF714DA5),
+          ),
+          child: MaterialApp.router(
+            debugShowCheckedModeBanner: false,
+            title: 'RunNaiMor',
+            routerConfig: router,
+            theme: buildTheme(),
+          ),
         ),
       ),
     );

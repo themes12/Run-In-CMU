@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:runinmor/pages/home_page.dart';
 import 'package:runinmor/pages/map_page.dart';
+import 'package:runinmor/pages/route_list_page.dart';
 
 import '../pages/scaffold.dart';
 
@@ -30,12 +31,20 @@ final GoRouter router = GoRouter(
             return const HomePage();
           },
           routes: <RouteBase>[
-            // This screen is displayed on the ShellRoute's Navigator.
+            GoRoute(
+              name: "RouteList",
+              path: 'route-list',
+              builder: (BuildContext context, GoRouterState state) {
+                return const RouteListPage();
+              },
+            ),
             GoRoute(
               name: "Map",
               path: 'map',
               builder: (BuildContext context, GoRouterState state) {
-                return const MapPage();
+                return MapPage(
+                  selectedRoute: state.uri.queryParameters['selectedRoute'],
+                );
               },
             ),
           ],

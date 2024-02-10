@@ -1,3 +1,4 @@
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:uicons/uicons.dart';
@@ -15,106 +16,47 @@ class NavigationBarCustom extends StatelessWidget {
 
     return NavigationBar(
       indicatorColor: Colors.transparent,
-      height: const Size.fromHeight(kBottomNavigationBarHeight * 1.1).height,
+      height: const Size.fromHeight(kBottomNavigationBarHeight).height,
       elevation: 1,
       backgroundColor: const Color(0xFFF5F5F5),
       onDestinationSelected: (int index) =>
           navigation.changePage(context, index),
       selectedIndex: navigation.currentPageIndex,
-      destinations: <Widget>[
+      destinations: const <Widget>[
         NavigationDestination(
           selectedIcon: Icon(
-            UIcons.regularRounded.home,
-            color: const Color(0xFF522693),
+            FluentIcons.home_24_regular,
+            color: Color(0xFF522693),
           ),
           icon: Icon(
-            UIcons.regularRounded.home,
-            color: const Color(0xFFB1B1B1),
+            FluentIcons.home_24_regular,
+            color: Color(0xFFB1B1B1),
           ),
           label: 'Home',
         ),
         NavigationDestination(
           selectedIcon: Icon(
-            UIcons.regularRounded.running,
-            color: const Color(0xFF522693),
+            FluentIcons.run_24_regular,
+            color: Color(0xFF522693),
           ),
           icon: Icon(
-            UIcons.regularRounded.running,
-            color: const Color(0xFFB1B1B1),
+            FluentIcons.run_24_regular,
+            color: Color(0xFFB1B1B1),
           ),
           label: 'Run',
         ),
         NavigationDestination(
           selectedIcon: Icon(
-            UIcons.regularRounded.stats,
-            color: const Color(0xFF522693),
+            FluentIcons.calendar_data_bar_24_regular,
+            color: Color(0xFF522693),
           ),
           icon: Icon(
-            UIcons.regularRounded.stats,
-            color: const Color(0xFFB1B1B1),
+            FluentIcons.calendar_data_bar_24_regular,
+            color: Color(0xFFB1B1B1),
           ),
           label: 'Activity',
         ),
       ],
     );
-
-    // @override
-    // Widget build(BuildContext context) {
-    //   final navigation = Provider.of<NavigationBarProvider>(context);
-    //
-    //   return BottomNavigationBar(
-    //     backgroundColor: const Color(0xFFF5F5F5),
-    //     elevation: 0,
-    //     selectedFontSize: 15,
-    //     unselectedFontSize: 15,
-    //     type: BottomNavigationBarType.fixed,
-    //     currentIndex: navigation.currentPageIndex,
-    //     onTap: (index) => navigation.changePage(index),
-    //     unselectedLabelStyle: const TextStyle(
-    //       color: Color(0xFFB1B1B1),
-    //       fontWeight: FontWeight.w400,
-    //     ),
-    //     unselectedItemColor: const Color(0xFFB1B1B1),
-    //     unselectedIconTheme: const IconThemeData(
-    //       color: Color(0xFFB1B1B1),
-    //     ),
-    //     selectedLabelStyle: const TextStyle(
-    //       color: Color(0xFF522693),
-    //       fontWeight: FontWeight.w400,
-    //     ),
-    //     selectedItemColor: const Color(0xFF522693),
-    //     selectedIconTheme: const IconThemeData(
-    //       color: Color(0xFF522693),
-    //     ),
-    //     items: [
-    //       BottomNavigationBarItem(
-    //         icon: Icon(
-    //           UIcons.regularRounded.home,
-    //         ),
-    //         activeIcon: Icon(
-    //           UIcons.regularRounded.home,
-    //         ),
-    //         label: 'Home',
-    //       ),
-    //       BottomNavigationBarItem(
-    //         icon: Icon(
-    //           UIcons.regularRounded.running,
-    //         ),
-    //         activeIcon: Icon(
-    //           UIcons.regularRounded.running,
-    //         ),
-    //         label: 'Run',
-    //       ),
-    //       BottomNavigationBarItem(
-    //         icon: Icon(
-    //           UIcons.regularRounded.stats,
-    //         ),
-    //         activeIcon: Icon(
-    //           UIcons.regularRounded.stats,
-    //         ),
-    //         label: 'Activity',
-    //       ),
-    //     ],
-    //   );
   }
 }
