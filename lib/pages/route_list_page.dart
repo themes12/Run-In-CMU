@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:runinmor/components/template/white_container.dart';
 import 'package:runinmor/types/route_list.dart';
-import 'package:uicons/uicons.dart';
 
 import '../components/run/route_list_card.dart';
 import '../mock_data/route_list.dart';

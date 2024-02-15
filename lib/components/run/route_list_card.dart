@@ -1,7 +1,7 @@
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:runinmor/types/route_list.dart';
-import 'package:uicons/uicons.dart';
 
 class RouteListCard extends StatelessWidget {
   const RouteListCard({
@@ -95,7 +95,8 @@ class RouteListCard extends StatelessWidget {
                           child: IconButton(
                             padding: const EdgeInsets.all(0),
                             icon: Icon(
-                              UIcons.solidStraight.angle_small_right,
+                              FluentIcons.chevron_right_12_regular,
+                              size: 18,
                             ),
                             color: Colors.white,
                             onPressed: () {

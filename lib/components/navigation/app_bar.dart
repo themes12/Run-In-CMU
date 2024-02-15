@@ -1,7 +1,6 @@
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:uicons/uicons.dart';
 
 import '../../provider/navigation_bar_provider.dart';
 
@@ -21,8 +20,7 @@ class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
                 navigation.changePage(context, 0);
               },
               icon: Icon(
-                UIcons.regularRounded.angle_left,
-                size: 18,
+                FluentIcons.chevron_left_24_regular,
                 color: Colors.white,
               ),
             )

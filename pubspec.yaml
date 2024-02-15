@@ -42,10 +42,9 @@ dependencies:
   maps_toolkit: ^3.0.0
   go_router:
   google_fonts:
-  line_icons:
-  uicons: ^1.0.1
   provider: ^6.1.1
   fluentui_system_icons:
+  stop_watch_timer:
 
 dev_dependencies:
   flutter_test:

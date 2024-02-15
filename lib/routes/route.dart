@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
+import 'package:runinmor/pages/count_down_page.dart';
 import 'package:runinmor/pages/home_page.dart';
 import 'package:runinmor/pages/map_page.dart';
 import 'package:runinmor/pages/route_list_page.dart';
+import 'package:runinmor/pages/run_page.dart';
 
 import '../pages/scaffold.dart';
 
@@ -50,6 +52,24 @@ final GoRouter router = GoRouter(
           ],
         ),
       ],
+    ),
+    GoRoute(
+      name: "CountDown",
+      path: '/countdown',
+      builder: (BuildContext context, GoRouterState state) {
+        return CountDownPage(
+          selectedRoute: state.uri.queryParameters['selectedRoute'],
+        );
+      },
+    ),
+    GoRoute(
+      name: "Run",
+      path: '/run',
+      builder: (BuildContext context, GoRouterState state) {
+        return RunPage(
+          selectedRoute: state.uri.queryParameters['selectedRoute'],
+        );
+      },
     ),
   ],
 );
