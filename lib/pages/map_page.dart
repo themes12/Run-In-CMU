@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart' as googleMap;
 import 'package:location/location.dart';
+import 'package:runinmor/components/run/circular_button.dart';
 
 import 'package:runinmor/mock_data/route_list.dart';
 import 'package:runinmor/pages/count_down_page.dart';
@@ -128,41 +129,37 @@ class _MapPageState extends State<MapPage> {
                         topLeft: Radius.circular(10),
                         topRight: Radius.circular(10),
                       ),
-                      child: Stack(children: [
-                        googleMap.GoogleMap(
-                          initialCameraPosition: const googleMap.CameraPosition(
-                            target: _pMor,
-                            zoom: 15,
-                          ),
-                          markers: {
-                            googleMap.Marker(
-                              markerId: const googleMap.MarkerId(
-                                "_sourceLocation",
-                              ),
-                              icon: startMarker!,
-                              position: route.startPosition,
+                      child: Stack(
+                        children: [
+                          googleMap.GoogleMap(
+                            initialCameraPosition:
+                                const googleMap.CameraPosition(
+                              target: _pMor,
+                              zoom: 15,
                             ),
-                            googleMap.Marker(
-                              markerId: const googleMap.MarkerId(
-                                "_destinationLocation",
+                            markers: {
+                              googleMap.Marker(
+                                markerId: const googleMap.MarkerId(
+                                  "_sourceLocation",
+                                ),
+                                icon: startMarker!,
+                                position: route.startPosition,
                               ),
-                              icon: endMarker!,
-                              position: route.endPosition,
-                            )
-                          },
-                          polylines:
-                              Set<googleMap.Polyline>.of(polylines.values),
-                        ),
-                        Align(
-                          alignment: AlignmentDirectional.bottomCenter,
-                          child: Padding(
-                            padding: const EdgeInsets.only(bottom: 32),
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                minimumSize: Size(109, 109),
-                                backgroundColor: Color(0xFF262626),
-                                shape: CircleBorder(),
-                              ),
+                              googleMap.Marker(
+                                markerId: const googleMap.MarkerId(
+                                  "_destinationLocation",
+                                ),
+                                icon: endMarker!,
+                                position: route.endPosition,
+                              )
+                            },
+                            polylines:
+                                Set<googleMap.Polyline>.of(polylines.values),
+                          ),
+                          Align(
+                            alignment: AlignmentDirectional.bottomCenter,
+                            child: CircularButton(
+                              color: Color(0xFF262626),
                               onPressed: () {
                                 context.goNamed(
                                   'CountDown',
@@ -182,8 +179,8 @@ class _MapPageState extends State<MapPage> {
                               ),
                             ),
                           ),
-                        ),
-                      ]),
+                        ],
+                      ),
                     ),
                   ),
                 ],

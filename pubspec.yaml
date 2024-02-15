@@ -45,6 +45,7 @@ dependencies:
   provider: ^6.1.1
   fluentui_system_icons:
   stop_watch_timer:
+  intl: ^0.19.0
 
 dev_dependencies:
   flutter_test:
