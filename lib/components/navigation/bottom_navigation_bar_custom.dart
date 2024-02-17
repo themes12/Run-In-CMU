@@ -56,6 +56,17 @@ class NavigationBarCustom extends StatelessWidget {
           ),
           label: 'Activity',
         ),
+        NavigationDestination(
+          selectedIcon: Icon(
+            FluentIcons.calendar_data_bar_24_regular,
+            color: Color(0xFF522693),
+          ),
+          icon: Icon(
+            FluentIcons.calendar_data_bar_24_regular,
+            color: Color(0xFFB1B1B1),
+          ),
+          label: 'Ar',
+        ),
       ],
     );
   }

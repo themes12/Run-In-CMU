@@ -4,6 +4,7 @@ import 'package:runinmor/pages/home_page.dart';
 import 'package:runinmor/pages/map_page.dart';
 import 'package:runinmor/pages/route_list_page.dart';
 
+import '../pages/ar_page.dart';
 import '../pages/scaffold.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -46,6 +47,13 @@ final GoRouter router = GoRouter(
                   selectedRoute: state.uri.queryParameters['selectedRoute'],
                 );
               },
+            ),GoRoute(
+              name: "AR", // Name of the route
+              path: 'ar7', // Path to navigate to AR page
+              builder: (BuildContext context, GoRouterState state) {
+                return const ARPage();
+              },
+
             ),
           ],
         ),

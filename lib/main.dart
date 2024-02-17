@@ -5,7 +5,8 @@ import 'package:runinmor/provider/navigation_bar_provider.dart';
 import 'package:runinmor/routes/route.dart';
 import 'package:runinmor/theme/theme.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
