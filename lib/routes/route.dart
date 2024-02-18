@@ -5,6 +5,8 @@ import 'package:runinmor/pages/home_page.dart';
 import 'package:runinmor/pages/map_page.dart';
 import 'package:runinmor/pages/route_list_page.dart';
 import 'package:runinmor/pages/run_page.dart';
+import 'package:runinmor/pages/run_summary_page.dart';
+import 'package:runinmor/types/RunSummary.dart';
 
 import '../pages/scaffold.dart';
 
@@ -46,6 +48,17 @@ final GoRouter router = GoRouter(
               builder: (BuildContext context, GoRouterState state) {
                 return MapPage(
                   selectedRoute: state.uri.queryParameters['selectedRoute'],
+                );
+              },
+            ),
+            GoRoute(
+              name: "RunSummary",
+              path: 'run-summary',
+              builder: (BuildContext context, GoRouterState state) {
+                RunSummary data = state.extra as RunSummary;
+                return RunSummaryPage(
+                  selectedRoute: state.uri.queryParameters['selectedRoute'],
+                  runSummary: data,
                 );
               },
             ),

@@ -2,26 +2,33 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart' as googleMap;
+import 'package:intl/intl.dart';
 import 'package:location/location.dart';
 import 'package:runinmor/components/run/circular_button.dart';
 
 import 'package:runinmor/mock_data/route_list.dart';
 import 'package:runinmor/pages/count_down_page.dart';
+import 'package:runinmor/types/RunSummary.dart';
 import 'package:runinmor/types/route_list.dart';
 
 import '../components/template/white_container.dart';
 import '../utils/constant.dart';
 import '../utils/map/svg_to_bitmap.dart';
 
-class MapPage extends StatefulWidget {
-  const MapPage({super.key, required this.selectedRoute});
+class RunSummaryPage extends StatefulWidget {
+  const RunSummaryPage({
+    super.key,
+    required this.selectedRoute,
+    required this.runSummary,
+  });
   final String? selectedRoute;
+  final RunSummary runSummary;
 
   @override
-  State<MapPage> createState() => _MapPageState();
+  State<RunSummaryPage> createState() => _RunSummaryPageState();
 }
 
-class _MapPageState extends State<MapPage> {
+class _RunSummaryPageState extends State<RunSummaryPage> {
   Location locationController = Location();
 
   googleMap.BitmapDescriptor? startMarker;
@@ -114,6 +121,7 @@ class _MapPageState extends State<MapPage> {
                       child: Stack(
                         children: [
                           googleMap.GoogleMap(
+                            myLocationButtonEnabled: false,
                             initialCameraPosition:
                                 const googleMap.CameraPosition(
                               target: pMor,
@@ -140,23 +148,95 @@ class _MapPageState extends State<MapPage> {
                           ),
                           Align(
                             alignment: AlignmentDirectional.bottomCenter,
-                            child: CircularButton(
-                              color: Color(0xFF262626),
-                              onPressed: () {
-                                context.goNamed(
-                                  'CountDown',
-                                  queryParameters: {
-                                    'duration': '3',
-                                    "selectedRoute": widget.selectedRoute,
-                                  },
-                                );
-                              },
-                              child: Text(
-                                'START',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 24,
+                            child: Expanded(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Color(0xFF262626),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 16,
+                                    vertical: 32,
+                                  ),
+                                  child: Expanded(
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Text(
+                                              (widget.runSummary.distance /
+                                                      1000)
+                                                  .toStringAsFixed(2),
+                                              style: TextStyle(
+                                                fontSize: 32,
+                                                fontWeight: FontWeight.w600,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            Text(
+                                              'Kilometers',
+                                              style: TextStyle(
+                                                color: Color(0xFFB49AD9),
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.normal,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Text(
+                                              widget.runSummary.pace
+                                                  .toStringAsFixed(2),
+                                              style: TextStyle(
+                                                fontSize: 32,
+                                                fontWeight: FontWeight.w600,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            Text(
+                                              'Avg. Pace',
+                                              style: TextStyle(
+                                                color: Color(0xFFB49AD9),
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.normal,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Text(
+                                              DateFormat('mm:ss').format(
+                                                DateTime
+                                                    .fromMillisecondsSinceEpoch(
+                                                  widget.runSummary.time,
+                                                ),
+                                              ),
+                                              style: TextStyle(
+                                                fontSize: 32,
+                                                fontWeight: FontWeight.w600,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            Text(
+                                              'Time',
+                                              style: TextStyle(
+                                                color: Color(0xFFB49AD9),
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.normal,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
