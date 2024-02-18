@@ -60,7 +60,8 @@ class _ARPageState extends State<ARPage> {
 
   Future<void> onScreenshotCaptured(ui.Image image) async {
     // Convert ui.Image to ByteData
-    final ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+    final ByteData? byteData =
+        await image.toByteData(format: ui.ImageByteFormat.png);
     final Uint8List bytes = byteData!.buffer.asUint8List();
 
     // Process captured image for face detection
@@ -86,7 +87,7 @@ class _ARPageState extends State<ARPage> {
 
   Future<void> _captureAndProcessScreenshot() async {
     RenderRepaintBoundary boundary =
-    _arCoreKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
+        _arCoreKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
     ui.Image image = await boundary.toImage(pixelRatio: 1.0);
     onScreenshotCaptured(image);
   }
@@ -97,7 +98,8 @@ class _ARPageState extends State<ARPage> {
       final faceImage = await loadUIImage('asset/images/glasses.png');
 
       // Convert ui.Image to ByteData
-      final ByteData? byteData = await faceImage.toByteData(format: ui.ImageByteFormat.png);
+      final ByteData? byteData =
+          await faceImage.toByteData(format: ui.ImageByteFormat.png);
       final Uint8List bytes = byteData!.buffer.asUint8List();
 
       // Create material using the face filter image
@@ -123,7 +125,8 @@ class _ARPageState extends State<ARPage> {
       );
 
       // Add the node to the AR scene
-      arCoreController?.addArCoreNode(node); // Use addArCoreNode instead of addNode
+      arCoreController
+          ?.addArCoreNode(node); // Use addArCoreNode instead of addNode
     }
   }
 
@@ -148,7 +151,9 @@ class _ARPageState extends State<ARPage> {
             arCoreController = controller;
           },
           enableTapRecognizer: true,
-          type: cameraIndex == 0 ? ArCoreViewType.AUGMENTEDFACE : ArCoreViewType.STANDARDVIEW,
+          type: cameraIndex == 0
+              ? ArCoreViewType.AUGMENTEDFACE
+              : ArCoreViewType.STANDARDVIEW,
           // Use AUGMENTEDFACE for back camera, STANDARDVIEW for front camera
         ),
       ),
@@ -170,3 +175,90 @@ class _ARPageState extends State<ARPage> {
     );
   }
 }
+
+// import 'package:arcore_flutter_plugin/arcore_flutter_plugin.dart';
+// import 'package:flutter/material.dart';
+// import 'package:vector_math/vector_math_64.dart' as vector;
+//
+// class ARPage extends StatefulWidget {
+//   @override
+//   _ARPageState createState() => _ARPageState();
+// }
+//
+// class _ARPageState extends State<ARPage> {
+//   late ArCoreController arCoreController;
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       home: Scaffold(
+//         appBar: AppBar(
+//           title: const Text('Hello World'),
+//         ),
+//         body: ArCoreView(
+//           onArCoreViewCreated: _onArCoreViewCreated,
+//         ),
+//       ),
+//     );
+//   }
+//
+//   void _onArCoreViewCreated(ArCoreController controller) {
+//     arCoreController = controller;
+//
+//     _addSphere(arCoreController);
+//     _addCylindre(arCoreController);
+//     _addCube(arCoreController);
+//   }
+//
+//   void _addSphere(ArCoreController controller) {
+//     final material = ArCoreMaterial(color: Color.fromARGB(120, 66, 134, 244));
+//     final sphere = ArCoreSphere(
+//       materials: [material],
+//       radius: 0.1,
+//     );
+//     final node = ArCoreNode(
+//       shape: sphere,
+//       position: vector.Vector3(0, 0, -1.5),
+//     );
+//     controller.addArCoreNode(node);
+//   }
+//
+//   void _addCylindre(ArCoreController controller) {
+//     final material = ArCoreMaterial(
+//       color: Colors.red,
+//       reflectance: 1.0,
+//     );
+//     final cylindre = ArCoreCylinder(
+//       materials: [material],
+//       radius: 0.5,
+//       height: 0.3,
+//     );
+//     final node = ArCoreNode(
+//       shape: cylindre,
+//       position: vector.Vector3(0.0, -0.5, -2.0),
+//     );
+//     controller.addArCoreNode(node);
+//   }
+//
+//   void _addCube(ArCoreController controller) {
+//     final material = ArCoreMaterial(
+//       color: Color.fromARGB(120, 66, 134, 244),
+//       metallic: 1.0,
+//     );
+//     final cube = ArCoreCube(
+//       materials: [material],
+//       size: vector.Vector3(0.5, 0.5, 0.5),
+//     );
+//     final node = ArCoreNode(
+//       shape: cube,
+//       position: vector.Vector3(-0.5, 0.5, -3.5),
+//     );
+//     controller.addArCoreNode(node);
+//   }
+//
+//   @override
+//   void dispose() {
+//     arCoreController.dispose();
+//     super.dispose();
+//   }
+// }

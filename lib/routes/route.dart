@@ -47,13 +47,13 @@ final GoRouter router = GoRouter(
                   selectedRoute: state.uri.queryParameters['selectedRoute'],
                 );
               },
-            ),GoRoute(
+            ),
+            GoRoute(
               name: "AR", // Name of the route
               path: 'ar7', // Path to navigate to AR page
               builder: (BuildContext context, GoRouterState state) {
-                return const ARPage();
+                return ARPage();
               },
-
             ),
           ],
         ),
