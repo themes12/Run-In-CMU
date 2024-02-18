@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
+import '../components/home/home_stat_card.dart';
 import '../components/template/white_container.dart';
 import '../provider/navigation_bar_provider.dart';
+import 'home_stat_card.dart'; // Import the BestStatsCard widget
+
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -62,6 +65,23 @@ class HomePage extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
+                  // Add the BestStatsCard widget here
+
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 15),
+              child: Column(
+                children: [
+                  // Add the BestStatsCard widget here
+                  const BestStatsCard(
+                    name: 'Aung Keaw',
+                    distance: '2.64 Km',
+                    pace: '11\'59"',
+                    time: '31:04',
+                  ),
+
                 ],
               ),
             ),
