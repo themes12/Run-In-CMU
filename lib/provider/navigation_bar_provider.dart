@@ -15,6 +15,9 @@ class NavigationBarProvider extends ChangeNotifier {
     } else if (index == 1) {
       context.goNamed('RouteList');
       // context.goNamed('RouteList', queryParameters: {'backRoute': '/'}); // with back button
+    }else if (index == 3) {
+      context.goNamed('Ar');
+      // context.goNamed('RouteList', queryParameters: {'backRoute': '/'}); // with back button
     } else {
       _currentPageIndex = 0;
       context.go('/404');

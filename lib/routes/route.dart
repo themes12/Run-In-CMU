@@ -8,6 +8,7 @@ import 'package:runinmor/pages/run_page.dart';
 import 'package:runinmor/pages/run_summary_page.dart';
 import 'package:runinmor/types/RunSummary.dart';
 
+import '../pages/ar_page.dart';
 import '../pages/scaffold.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -81,6 +82,15 @@ final GoRouter router = GoRouter(
       builder: (BuildContext context, GoRouterState state) {
         return RunPage(
           selectedRoute: state.uri.queryParameters['selectedRoute'],
+        );
+      },
+    ),
+    GoRoute(
+      name: "Ar",
+      path: '/ar',
+      builder: (BuildContext context, GoRouterState state) {
+        return ARPage(
+
         );
       },
     ),
