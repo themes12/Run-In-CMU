@@ -9,11 +9,13 @@ import 'package:location/location.dart';
 
 import 'package:runinmor/mock_data/route_list.dart';
 import 'package:runinmor/pages/count_down_page.dart';
+import 'package:runinmor/types/RunSummary.dart';
 import 'package:runinmor/types/route_list.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 
 import '../components/run/circular_button.dart';
 import '../components/template/white_container.dart';
+import '../utils/constant.dart';
 import '../utils/map/convert_google_to_map_tool_lat_long.dart';
 import '../utils/map/svg_to_bitmap.dart';
 
@@ -30,8 +32,6 @@ class RunPage extends StatefulWidget {
 
 class _RunPageState extends State<RunPage> {
   Location locationController = Location();
-  static const googleMap.LatLng _pMor =
-      googleMap.LatLng(18.801511835577063, 98.95176971909669);
 
   mapTool.LatLng? prevLocation;
 
@@ -97,7 +97,7 @@ class _RunPageState extends State<RunPage> {
                 //     : "You're not on the route right now, Get back to it!"),
                 googleMap.GoogleMap(
                   initialCameraPosition: googleMap.CameraPosition(
-                    target: _pMor,
+                    target: pMor,
                     zoom: 15,
                   ),
                   markers: {
@@ -192,7 +192,8 @@ class _RunPageState extends State<RunPage> {
                                     String formattedTime =
                                         DateFormat('mm:ss').format(
                                       DateTime.fromMillisecondsSinceEpoch(
-                                          value ?? 0),
+                                        value ?? 0,
+                                      ),
                                     );
                                     return Column(
                                       mainAxisSize: MainAxisSize.min,
@@ -233,15 +234,12 @@ class _RunPageState extends State<RunPage> {
                         color: Color(0xFF262626),
                         onPressed: () {
                           if (isPause) {
-                            print("it should stop");
+                            onStop();
                           } else {
-                            print(isPause);
                             setState(() {
                               isPause = !isPause;
                               _stopWatchTimer.onStopTimer();
                             });
-
-                            print(isPause);
                           }
                         },
                         child: Icon(
@@ -260,12 +258,10 @@ class _RunPageState extends State<RunPage> {
                           ? CircularButton(
                               color: Color(0xFF714DA5),
                               onPressed: () {
-                                print(isPause);
                                 setState(() {
                                   isPause = !isPause;
                                 });
                                 _stopWatchTimer.onStartTimer();
-                                print(isPause);
                               },
                               child: Icon(
                                 FluentIcons.play_24_filled,
@@ -278,6 +274,38 @@ class _RunPageState extends State<RunPage> {
                 ),
               ],
             ),
+    );
+  }
+
+  void onReachEndPosition(LocationData currentLocation) {
+    final distanceToEnd = mapTool.SphericalUtil.computeDistanceBetween(
+      mapTool.LatLng(
+        currentLocation.latitude!,
+        currentLocation.longitude!,
+      ),
+      mapTool.LatLng(
+        route.endPosition.latitude,
+        route.endPosition.longitude,
+      ),
+    );
+    if (distanceToEnd <= 10) {
+      onStop();
+    }
+  }
+
+  void onStop() {
+    final data = RunSummary(
+      pace: pace,
+      distance: _totalDistance,
+      time: _stopWatchTimer.rawTime.value,
+    );
+    context.goNamed(
+      'RunSummary',
+      queryParameters: {
+        'selectedRoute': widget.selectedRoute,
+        'backRoute': '/',
+      },
+      extra: data,
     );
   }
 
@@ -330,6 +358,7 @@ class _RunPageState extends State<RunPage> {
             currentLocation.latitude!,
             currentLocation.longitude!,
           );
+          onReachEndPosition(currentLocation);
         });
       }
     });

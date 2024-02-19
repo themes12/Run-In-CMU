@@ -83,37 +83,49 @@ class RouteListCard extends StatelessWidget {
                       const SizedBox(
                         width: 10,
                       ),
-                      Material(
-                        color: Colors.transparent,
-                        child: Ink(
-                          width: 32,
-                          height: 32,
-                          decoration: const ShapeDecoration(
-                            color: Color(0xFF262626),
-                            shape: CircleBorder(),
-                          ),
-                          child: IconButton(
-                            padding: const EdgeInsets.all(0),
-                            icon: Icon(
-                              FluentIcons.chevron_right_12_regular,
-                              size: 18,
-                            ),
-                            color: Colors.white,
-                            onPressed: () {
-                              context.goNamed(
-                                'Map',
-                                queryParameters: {
-                                  'backRoute': '/route-list',
-                                  'selectedRoute': route.name,
-                                },
-                              );
-                            },
-                          ),
+                      IconButton(
+                        style: IconButton.styleFrom(
+                          minimumSize: Size(32, 32),
+                          shape: CircleBorder(),
+                          backgroundColor: Color(0xFF262626),
                         ),
+                        padding: const EdgeInsets.all(0),
+                        icon: Icon(
+                          FluentIcons.chevron_right_12_regular,
+                          size: 18,
+                        ),
+                        color: Colors.white,
+                        onPressed: () {
+                          // context.goNamed(
+                          //   'Map',
+                          //   queryParameters: {
+                          //     'backRoute': '/route-list',
+                          //     'selectedRoute': route.name,
+                          //   },
+                          // );
+                        },
                       )
                     ],
                   ),
                 ],
+              ),
+            ),
+            Material(
+              color: Colors.transparent,
+              elevation: 0,
+              child: InkWell(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(15),
+                ),
+                onTap: () {
+                  context.goNamed(
+                    'Map',
+                    queryParameters: {
+                      'backRoute': '/route-list',
+                      'selectedRoute': route.name,
+                    },
+                  );
+                },
               ),
             )
           ],
