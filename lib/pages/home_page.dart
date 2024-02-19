@@ -77,9 +77,10 @@ class HomePage extends StatelessWidget {
                   // Add the BestStatsCard widget here
                   const BestStatsCard(
                     name: 'Aung Keaw',
-                    distance: '2.64 Km',
+                    distance: '2.64',
                     pace: '11\'59"',
                     time: '31:04',
+                    imageUrl: '',
                   ),
 
                 ],
