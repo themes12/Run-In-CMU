@@ -25,8 +25,19 @@ class BestStatsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       width: double.infinity,
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.4),
+            blurRadius: 4.0,
+            spreadRadius: 0.0,
+            offset: Offset(0.0, 4.0), // Adjust offsets as needed
+          ),
+        ],
+        borderRadius: BorderRadius.circular(10.0),
+      ),
       child: Card(
         elevation: 0,
         margin: EdgeInsets.zero,
@@ -90,70 +101,80 @@ class BestStatsCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Column(
-                    children: [
-                      Text(
-                        '$distance',
-                        style: const TextStyle(
-                          color: Color(0xFF714DA5),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0), // Adjust padding as needed
+                    child: Column(
+                      children: [
+                        Text(
+                          '$distance',
+                          style: const TextStyle(
+                            color: Color(0xFF714DA5),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
                         ),
-                      ),
-                      Text(
-                        'Km',
-                        style: const TextStyle(
-                          color: Color(0xFF7A7A7A),
-                          fontWeight: FontWeight.normal,
-                          fontSize: 15,
+                        Text(
+                          'Km',
+                          style: const TextStyle(
+                            color: Color(0xFF7A7A7A),
+                            fontWeight: FontWeight.normal,
+                            fontSize: 15,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                   const SizedBox(height: 4),
-                  Column(
-                    children: [
-                      Text(
-                        '$pace',
-                        style: const TextStyle(
-                          color: Color(0xFF714DA5),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 0.0), // Adjust padding as needed
+                    child: Column(
+                      children: [
+                        Text(
+                          '$pace',
+                          style: const TextStyle(
+                            color: Color(0xFF714DA5),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
                         ),
-                      ),
-                      Text(
-                        'Avg. Pace',
-                        style: const TextStyle(
-                          color: Color(0xFF7A7A7A),
-                          fontWeight: FontWeight.normal,
-                          fontSize: 15,
+                        Text(
+                          'Avg. Pace',
+                          style: const TextStyle(
+                            color: Color(0xFF7A7A7A),
+                            fontWeight: FontWeight.normal,
+                            fontSize: 15,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                   const SizedBox(height: 8),
-                  Column(
-                    children: [
-                      Text(
-                        '$time',
-                        style: const TextStyle(
-                          color: Color(0xFF714DA5),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0), // Adjust padding as needed
+                    child: Column(
+                      children: [
+                        Text(
+                          '$time',
+                          style: const TextStyle(
+                            color: Color(0xFF714DA5),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
                         ),
-                      ),
-                      Text(
-                        'Time',
-                        style: const TextStyle(
-                          color: Color(0xFF17A7A7A),
-                          fontWeight: FontWeight.normal,
-                          fontSize: 15,
+                        Text(
+                          'Time',
+                          style: const TextStyle(
+                            color: Color(0xFF17A7A7A),
+                            fontWeight: FontWeight.normal,
+                            fontSize: 15,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ],
               ),
+
             ],
           ),
         ),
