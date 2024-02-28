@@ -96,7 +96,7 @@ class RouteListCard extends StatelessWidget {
                         ),
                         color: Colors.white,
                         onPressed: () {
-                          // context.goNamed(
+                          // context.pushNamed(
                           //   'Map',
                           //   queryParameters: {
                           //     'backRoute': '/route-list',
@@ -118,7 +118,7 @@ class RouteListCard extends StatelessWidget {
                   Radius.circular(15),
                 ),
                 onTap: () {
-                  context.goNamed(
+                  context.pushNamed(
                     'Map',
                     queryParameters: {
                       'backRoute': '/route-list',

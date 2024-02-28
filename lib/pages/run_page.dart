@@ -299,7 +299,7 @@ class _RunPageState extends State<RunPage> {
       distance: _totalDistance,
       time: _stopWatchTimer.rawTime.value,
     );
-    context.goNamed(
+    context.pushNamed(
       'RunSummary',
       queryParameters: {
         'selectedRoute': widget.selectedRoute,
