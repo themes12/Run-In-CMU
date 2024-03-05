@@ -11,12 +11,15 @@ class NavigationBarProvider extends ChangeNotifier {
     notifyListeners();
 
     if (index == 0) {
-      context.pushNamed('Home');
+      context.goNamed('Home');
+      // context.pushNamed('Home');
     } else if (index == 1) {
-      context.pushNamed('RouteList');
+      // context.pushNamed('RouteList');
+      context.goNamed('RouteList');
       // context.pushNamed('RouteList', queryParameters: {'backRoute': '/'}); // with back button
-    }else if (index == 3) {
-      context.pushNamed('Ar');
+    } else if (index == 3) {
+      // context.pushNamed('Ar');
+      context.goNamed('Ar');
       // context.pushNamed('RouteList', queryParameters: {'backRoute': '/'}); // with back button
     } else {
       _currentPageIndex = 0;

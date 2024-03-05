@@ -146,99 +146,130 @@ class _RunSummaryPageState extends State<RunSummaryPage> {
                             polylines:
                                 Set<googleMap.Polyline>.of(polylines.values),
                           ),
-                          Align(
-                            alignment: AlignmentDirectional.bottomCenter,
-                            child: Expanded(
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: Color(0xFF262626),
-                                ),
-                                child: Padding(
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: 16,
-                                    vertical: 32,
+                          Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(16),
+                                  child: FloatingActionButton(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(100),
+                                    ),
+                                    backgroundColor: const Color(0xFF714DA5),
+                                    child: const Icon(
+                                      Icons.camera_alt,
+                                      color: Colors.white,
+                                    ),
+                                    onPressed: () {
+                                      context.goNamed(
+                                        'Ar',
+                                        queryParameters: {
+                                          'isHideNavigationBar': 'true',
+                                          'backRoute': '/',
+                                        },
+                                      );
+                                    },
                                   ),
-                                  child: Expanded(
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      children: [
-                                        Column(
-                                          mainAxisSize: MainAxisSize.min,
+                                ),
+                                Align(
+                                  alignment: Alignment.bottomCenter,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFF262626),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 16,
+                                        vertical: 32,
+                                      ),
+                                      child: Expanded(
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
                                           children: [
-                                            Text(
-                                              (widget.runSummary.distance /
-                                                      1000)
-                                                  .toStringAsFixed(2),
-                                              style: TextStyle(
-                                                fontSize: 32,
-                                                fontWeight: FontWeight.w600,
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                            Text(
-                                              'Kilometers',
-                                              style: TextStyle(
-                                                color: Color(0xFFB49AD9),
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.normal,
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                        Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            Text(
-                                              widget.runSummary.pace
-                                                  .toStringAsFixed(2),
-                                              style: TextStyle(
-                                                fontSize: 32,
-                                                fontWeight: FontWeight.w600,
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                            Text(
-                                              'Avg. Pace',
-                                              style: TextStyle(
-                                                color: Color(0xFFB49AD9),
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.normal,
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                        Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            Text(
-                                              DateFormat('mm:ss').format(
-                                                DateTime
-                                                    .fromMillisecondsSinceEpoch(
-                                                  widget.runSummary.time,
+                                            Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Text(
+                                                  (widget.runSummary.distance /
+                                                          1000)
+                                                      .toStringAsFixed(2),
+                                                  style: TextStyle(
+                                                    fontSize: 32,
+                                                    fontWeight: FontWeight.w600,
+                                                    color: Colors.white,
+                                                  ),
                                                 ),
-                                              ),
-                                              style: TextStyle(
-                                                fontSize: 32,
-                                                fontWeight: FontWeight.w600,
-                                                color: Colors.white,
-                                              ),
+                                                Text(
+                                                  'Kilometers',
+                                                  style: TextStyle(
+                                                    color: Color(0xFFB49AD9),
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                  ),
+                                                )
+                                              ],
                                             ),
-                                            Text(
-                                              'Time',
-                                              style: TextStyle(
-                                                color: Color(0xFFB49AD9),
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.normal,
-                                              ),
-                                            )
+                                            Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Text(
+                                                  widget.runSummary.pace
+                                                      .toStringAsFixed(2),
+                                                  style: TextStyle(
+                                                    fontSize: 32,
+                                                    fontWeight: FontWeight.w600,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  'Avg. Pace',
+                                                  style: TextStyle(
+                                                    color: Color(0xFFB49AD9),
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                            Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Text(
+                                                  DateFormat('mm:ss').format(
+                                                    DateTime
+                                                        .fromMillisecondsSinceEpoch(
+                                                      widget.runSummary.time,
+                                                    ),
+                                                  ),
+                                                  style: TextStyle(
+                                                    fontSize: 32,
+                                                    fontWeight: FontWeight.w600,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  'Time',
+                                                  style: TextStyle(
+                                                    color: Color(0xFFB49AD9),
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                  ),
+                                                )
+                                              ],
+                                            ),
                                           ],
                                         ),
-                                      ],
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
+                              ],
                             ),
                           ),
                         ],

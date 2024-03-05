@@ -8,7 +8,7 @@
   <application android:extractNativeLibs="true">
     <meta-data android:name="unity.splash-mode" android:value="0" />
     <meta-data android:name="unity.splash-enable" android:value="True" />
-    <meta-data android:name="unity.launch-fullscreen" android:value="True" />
+    <meta-data android:name="unity.launch-fullscreen" android:value="False" />
     <meta-data android:name="android.max_aspect" android:value="2.1" />
     <meta-data android:name="notch.config" android:value="portrait|landscape" />
     <meta-data android:name="unity.auto-report-fully-drawn" android:value="true" />

@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
           ),
           child: MaterialApp.router(
             debugShowCheckedModeBanner: false,
-            title: 'RunNaiMor',
+            title: 'Run Nai Mor',
             routerConfig: router,
             theme: buildTheme(),
           ),

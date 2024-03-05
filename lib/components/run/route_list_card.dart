@@ -118,7 +118,8 @@ class RouteListCard extends StatelessWidget {
                   Radius.circular(15),
                 ),
                 onTap: () {
-                  context.pushNamed(
+                  context.goNamed(
+                    // context.pushNamed(
                     'Map',
                     queryParameters: {
                       'backRoute': '/route-list',

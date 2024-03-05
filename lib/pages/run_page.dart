@@ -288,21 +288,30 @@ class _RunPageState extends State<RunPage> {
         route.endPosition.longitude,
       ),
     );
-    if (distanceToEnd <= 10) {
-      onStop();
-    }
+    // if (distanceToEnd <= 10) {
+    //   onStop();
+    // }
+    onStop();
   }
 
   void onStop() {
+    // final data = RunSummary(
+    //   pace: pace,
+    //   distance: _totalDistance,
+    //   time: _stopWatchTimer.rawTime.value,
+    // );
     final data = RunSummary(
-      pace: pace,
-      distance: _totalDistance,
-      time: _stopWatchTimer.rawTime.value,
+      pace: 10.52,
+      distance: 1401,
+      time: 650000,
     );
-    context.pushNamed(
+
+    context.goNamed(
+      // context.pushNamed(
       'RunSummary',
       queryParameters: {
         'selectedRoute': widget.selectedRoute,
+        // 'isHideNavigationBar': true,
         'backRoute': '/',
       },
       extra: data,
@@ -330,6 +339,7 @@ class _RunPageState extends State<RunPage> {
     }
 
     locationController.onLocationChanged.listen((LocationData currentLocation) {
+      // onReachEndPosition(currentLocation);
       if (currentLocation.latitude != null &&
           currentLocation.longitude != null) {
         setState(() {
@@ -358,7 +368,7 @@ class _RunPageState extends State<RunPage> {
             currentLocation.latitude!,
             currentLocation.longitude!,
           );
-          onReachEndPosition(currentLocation);
+          // onReachEndPosition(currentLocation);
         });
       }
     });

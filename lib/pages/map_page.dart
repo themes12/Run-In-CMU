@@ -143,7 +143,8 @@ class _MapPageState extends State<MapPage> {
                             child: CircularButton(
                               color: Color(0xFF262626),
                               onPressed: () {
-                                context.pushNamed(
+                                context.goNamed(
+                                  // context.pushNamed(
                                   'CountDown',
                                   queryParameters: {
                                     'duration': '3',

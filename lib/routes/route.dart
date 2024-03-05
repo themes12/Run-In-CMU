@@ -24,6 +24,7 @@ final GoRouter router = GoRouter(
       builder: (context, state, child) {
         return ScaffoldWithNavigation(
           backRoute: state.uri.queryParameters['backRoute'],
+          // isHideNavigationBar: state.uri.queryParameters['isHideNavigationBar'],
           child: child,
         );
       },
@@ -63,6 +64,13 @@ final GoRouter router = GoRouter(
                 );
               },
             ),
+            GoRoute(
+              name: "Ar",
+              path: 'ar',
+              builder: (BuildContext context, GoRouterState state) {
+                return ARPage();
+              },
+            ),
           ],
         ),
       ],
@@ -82,15 +90,6 @@ final GoRouter router = GoRouter(
       builder: (BuildContext context, GoRouterState state) {
         return RunPage(
           selectedRoute: state.uri.queryParameters['selectedRoute'],
-        );
-      },
-    ),
-    GoRoute(
-      name: "Ar",
-      path: '/ar',
-      builder: (BuildContext context, GoRouterState state) {
-        return ARPage(
-
         );
       },
     ),

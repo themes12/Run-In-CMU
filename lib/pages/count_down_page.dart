@@ -22,7 +22,8 @@ class _CountDownPageState extends State<CountDownPage> {
     super.initState();
     _stopWatchTimer.rawTime.listen((value) {
       if (value <= 1200) {
-        context.pushNamed(
+        context.goNamed(
+          // context.pushNamed(
           'Run',
           queryParameters: {
             "selectedRoute": widget.selectedRoute,
