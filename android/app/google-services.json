@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "829135899409",
+    "project_id": "run-in-mor-b47d5",
+    "storage_bucket": "run-in-mor-b47d5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:829135899409:android:9b3370b61a77ee34afdab0",
+        "android_client_info": {
+          "package_name": "com.example.runinmor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "829135899409-l8oqnbmpj8g5vfoq85e45at3naf25i5g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBY8oLOMS4a2IlWipHKcJ2z20wZd01Cg7Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "829135899409-l8oqnbmpj8g5vfoq85e45at3naf25i5g.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "829135899409-n4i21lnvh2dm224v45bh7tgvu6471i1q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.runinmor"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

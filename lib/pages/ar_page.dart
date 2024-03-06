@@ -45,33 +45,9 @@ class _ARPageState extends State<ARPage> {
               selectedPrefabs, // Message
             );
           }
+          print(message);
         },
       ),
     );
-    // return Scaffold(
-    //   floatingActionButton: FloatingActionButton(
-    //     child: Icon(Icons.change_circle),
-    //     onPressed: () {
-    //       final selectedPrefabs = widget.prefabs[widget.selectedPrefabs % 2];
-    //       widget.selectedPrefabs += 1;
-    //       sendToUnity(
-    //         "GameObject",
-    //         "SetFaceFilterPrefabs",
-    //         selectedPrefabs, // Message
-    //       );
-    //     },
-    //   ),
-    //   body: EmbedUnity(
-    //     onMessageFromUnity: (String message) {
-    //       final selectedPrefabs = widget.prefabs[widget.selectedPrefabs % 2];
-    //       widget.selectedPrefabs += 1;
-    //       sendToUnity(
-    //         "GameObject",
-    //         "SetFaceFilterPrefabs",
-    //         selectedPrefabs, // Message
-    //       );
-    //     },
-    //   ),
-    // );
   }
 }

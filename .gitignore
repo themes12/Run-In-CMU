@@ -25,3 +25,9 @@ doc/api/
 
 .flutter-plugins
 .flutter-plugins-dependencies
+android/unityLibrary/src/main/Il2CppOutputProject/Source/il2cppOutput/Il2CppToEditorData.json
+android/unityLibrary/src/main/Il2CppOutputProject/Source/il2cppOutput/Il2CppToEditorData.json
+android/unityLibrary/src/main/jniLibs/arm64-v8a/libil2cpp.so
+android/unityLibrary/src/main/jniLibs/armeabi-v7a/libil2cpp.so
+android/unityLibrary/symbols/arm64-v8a/libil2cpp.so
+android/unityLibrary/symbols/armeabi-v7a/libil2cpp.so
