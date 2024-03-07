@@ -54,7 +54,8 @@ class NavigationBarCustom extends StatelessWidget {
             color: Color(0xFFB1B1B1),
           ),
           label: 'Activity',
-        )
+        ),
+
       ],
     );
   }

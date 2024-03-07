@@ -71,7 +71,7 @@ final GoRouter router = GoRouter(
                   runSummary: data,
                 );
               },
-            ),
+             ),
             GoRoute(
               name: "Ar",
               path: 'ar',
