@@ -14,6 +14,7 @@ import 'package:runinmor/provider/user_provider.dart';
 import 'package:runinmor/types/RunSummary.dart';
 
 import '../pages/ar_page.dart';
+import '../pages/login_page.dart';
 import '../pages/scaffold.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -25,7 +26,7 @@ final user = UserProvider();
 
 final GoRouter router = GoRouter(
   navigatorKey: _rootNavigatorKey,
-  initialLocation: '/',
+  initialLocation: '/login',
   routes: [
     ShellRoute(
       navigatorKey: _shellNavigatorKey,
@@ -37,7 +38,6 @@ final GoRouter router = GoRouter(
         );
       },
       routes: [
-        // This screen is displayed on the ShellRoute's Navigator.
         GoRoute(
           name: "Home",
           path: '/',

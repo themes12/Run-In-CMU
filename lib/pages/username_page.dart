@@ -69,25 +69,6 @@ class LoginPage extends StatelessWidget {
 
             SizedBox(height: 30),
             // Sign in Button
-            Container(
-              height: 50,
-              width: 430,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Color(0xFF714DA5), // Set the border color here
-                    width: 1, // Set the border width here
-                  ),
-
-                ),
-              child: SignInButton(
-                Buttons.google,
-                text: "Sign up with Google",
-                onPressed: () {
-                  
-                },
-              )
-            ),
-
 
           ],
         ),
