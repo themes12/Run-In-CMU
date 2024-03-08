@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:runinmor/pages/count_down_page.dart';
+import 'package:runinmor/pages/history_page.dart';
 import 'package:runinmor/pages/home_page.dart';
 import 'package:runinmor/pages/login_page.dart';
 import 'package:runinmor/pages/map_page.dart';
@@ -71,12 +72,21 @@ final GoRouter router = GoRouter(
                   runSummary: data,
                 );
               },
-             ),
+            ),
             GoRoute(
               name: "Ar",
               path: 'ar',
               builder: (BuildContext context, GoRouterState state) {
-                return ARPage();
+                return ARPage(
+                  filter: state.uri.queryParameters['filter'],
+                );
+              },
+            ),
+            GoRoute(
+              name: "History",
+              path: 'history',
+              builder: (BuildContext context, GoRouterState state) {
+                return HistoryAcivity();
               },
             ),
           ],

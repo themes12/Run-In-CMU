@@ -1,15 +1,14 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:runinmor/components/template/white_container.dart';
-import 'package:runinmor/provider/route_provider.dart';
-import 'package:runinmor/types/route_list.dart';
+import 'package:runinmor/types/RunSummary.dart';
 
-import '../components/run/route_list_card.dart';
+import '../components/home/home_stat_card.dart';
+import '../components/template/white_container.dart';
+import '../provider/route_provider.dart';
 
-class RouteListPage extends StatelessWidget {
-  const RouteListPage({super.key});
+class HistoryAcivity extends StatelessWidget {
+  const HistoryAcivity({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +20,7 @@ class RouteListPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'Ready to run?',
+              'History',
               style: TextStyle(
                 color: Color(0xFF714DA5),
                 fontSize: 24,
@@ -31,7 +30,7 @@ class RouteListPage extends StatelessWidget {
             const Padding(
               padding: EdgeInsets.only(top: 6),
               child: Text(
-                'Choose your running route',
+                'Your previous runs',
                 style: TextStyle(
                   color: Color(0xFF969696),
                   fontSize: 18,
@@ -45,7 +44,7 @@ class RouteListPage extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(top: 20),
                   child: FutureBuilder(
-                    future: routeProvider.loadRouteList(),
+                    future: routeProvider.loadHistory(),
                     builder: (BuildContext context, AsyncSnapshot snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return const Center(
@@ -53,18 +52,27 @@ class RouteListPage extends StatelessWidget {
                         );
                       } else if (snapshot.connectionState ==
                           ConnectionState.done) {
-                        final routes = snapshot.data as Iterable<RunRoute>?;
+                        final routes =
+                            snapshot.data as Iterable<RunSummaryAdditional>?;
+                        // print(routes);
                         if (routes == null) {
                           return Text("No data");
                         } else {
                           final data = routes.toList();
+                          print(data);
                           return ListView.separated(
                             scrollDirection: Axis.vertical,
                             shrinkWrap: true,
                             itemBuilder: (context, index) {
                               final route = data[index];
-                              return RouteListCard(
-                                route: route,
+                              return BestStatsCard(
+                                name: route.name,
+                                distance:
+                                    (route.distance / 1000).toStringAsFixed(2),
+                                pace: route.pace.toString(),
+                                time: DateFormat("d/M/y")
+                                    .format(route.timestamp.toDate()),
+                                imageUrl: route.img_url,
                               );
                             },
                             separatorBuilder:

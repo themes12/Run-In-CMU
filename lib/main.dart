@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:runinmor/provider/auth_provider.dart';
 import 'package:runinmor/provider/navigation_bar_provider.dart';
+import 'package:runinmor/provider/route_provider.dart';
 import 'package:runinmor/provider/user_provider.dart';
 import 'package:runinmor/routes/route.dart';
 import 'package:runinmor/theme/theme.dart';
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => NavigationBarProvider()),
         ChangeNotifierProvider(create: (context) => AuthProvider()),
         ChangeNotifierProvider(create: (context) => UserProvider()),
+        ChangeNotifierProvider(create: (context) => RouteProvider()),
       ],
       child: SafeArea(
         child: AnnotatedRegion(

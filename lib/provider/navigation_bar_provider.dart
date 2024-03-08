@@ -19,14 +19,14 @@ class NavigationBarProvider extends ChangeNotifier {
       // context.pushNamed('RouteList');
       context.goNamed('RouteList');
       // context.pushNamed('RouteList', queryParameters: {'backRoute': '/'}); // with back button
-    } else if (index == 3) {
+    } else if (index == 2) {
       // context.pushNamed('Ar');
-      context.goNamed('Ar');
+      context.goNamed('History');
       // context.pushNamed('RouteList', queryParameters: {'backRoute': '/'}); // with back button
     } else {
-      _auth.signOut();
-      _currentPageIndex = 0;
-      // context.push('/404');
+      // _auth.signOut();
+      // _currentPageIndex = 0;
+      context.push('/404');
     }
   }
 }

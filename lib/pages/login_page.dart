@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:runinmor/provider/auth_provider.dart';
 import 'package:sign_in_button/sign_in_button.dart';
 import 'package:provider/provider.dart';
 import 'package:runinmor/components/template/white_container.dart';
@@ -8,7 +10,7 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+    final auth = Provider.of<AuthProvider>(context, listen: false);
     return Scaffold(
       backgroundColor: const Color(0xFF714DA5),
       body: WhiteContainer(
@@ -36,7 +38,8 @@ class LoginPage extends StatelessWidget {
             SizedBox(height: 30), // Spacing
             // Welcome Text
             Container(
-              margin: EdgeInsets.only(left: 20), // Adjust values as needed
+              margin: EdgeInsets.symmetric(
+                  horizontal: 20), // Adjust values as needed
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -52,7 +55,8 @@ class LoginPage extends StatelessWidget {
             ),
             SizedBox(height: 1),
             Container(
-              margin: EdgeInsets.only(left: 20), // Adjust values as needed
+              margin: EdgeInsets.symmetric(
+                  horizontal: 20), // Adjust values as needed
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -69,26 +73,40 @@ class LoginPage extends StatelessWidget {
 
             SizedBox(height: 30),
             // Sign in Button
-            Container(
-              height: 50,
-              width: 430,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Color(0xFF714DA5), // Set the border color here
-                    width: 1, // Set the border width here
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 20,
+              ),
+              child: SizedBox(
+                width: double.infinity,
+                height: 45,
+                child: OutlinedButton.icon(
+                  style: OutlinedButton.styleFrom(
+                    side: const BorderSide(
+                      color: Color(0xFF714DA5),
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
-
+                  onPressed: () {
+                    auth.handleGoogleSignin();
+                  },
+                  icon: SvgPicture.asset(
+                    'asset/images/google.svg',
+                    width: 30,
+                    height: 30,
+                  ),
+                  label: Text('Sign up with Google'),
                 ),
-              child: SignInButton(
-                Buttons.google,
-                text: "Sign up with Google",
-                onPressed: () {
-                  
-                },
-              )
+              ),
             ),
-
-
+            // SignInButton(
+            //   Buttons.google,
+            //   text: "Sign up with Google",
+            //   onPressed: () {},
+            //   shape: ,
+            // ),
           ],
         ),
       ),

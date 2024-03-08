@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart' as googleMap;
 import 'package:location/location.dart';
+import 'package:provider/provider.dart';
 import 'package:runinmor/components/run/circular_button.dart';
 
-import 'package:runinmor/mock_data/route_list.dart';
 import 'package:runinmor/pages/count_down_page.dart';
 import 'package:runinmor/types/route_list.dart';
 
 import '../components/template/white_container.dart';
+import '../provider/route_provider.dart';
 import '../utils/constant.dart';
 import '../utils/map/svg_to_bitmap.dart';
 
@@ -30,12 +31,14 @@ class _MapPageState extends State<MapPage> {
   Map<googleMap.PolylineId, googleMap.Polyline> polylines = {};
 
   late final RunRoute route;
+  late final routeProvider;
 
   @override
   void initState() {
     super.initState();
-    route = routeList.data
-        .firstWhere((element) => element.name == widget.selectedRoute);
+    routeProvider = Provider.of<RouteProvider>(context, listen: false);
+    route = routeProvider.routeList
+        .firstWhere((element) => element.uid == widget.selectedRoute);
     generatePolylineFromPoints(route.polylinePoints);
   }
 

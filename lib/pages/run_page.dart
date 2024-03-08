@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
@@ -6,8 +8,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart' as googleMap;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:location/location.dart';
+import 'package:provider/provider.dart';
 
-import 'package:runinmor/mock_data/route_list.dart';
 import 'package:runinmor/pages/count_down_page.dart';
 import 'package:runinmor/types/RunSummary.dart';
 import 'package:runinmor/types/route_list.dart';
@@ -15,6 +17,7 @@ import 'package:stop_watch_timer/stop_watch_timer.dart';
 
 import '../components/run/circular_button.dart';
 import '../components/template/white_container.dart';
+import '../provider/route_provider.dart';
 import '../utils/constant.dart';
 import '../utils/map/convert_google_to_map_tool_lat_long.dart';
 import '../utils/map/svg_to_bitmap.dart';
@@ -48,6 +51,7 @@ class _RunPageState extends State<RunPage> {
   Map<googleMap.PolylineId, googleMap.Polyline> polylines = {};
   num _totalDistance = 0;
   late final RunRoute route;
+  late final RouteProvider routeProvider;
 
   bool isPause = false;
 
@@ -62,8 +66,11 @@ class _RunPageState extends State<RunPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    route = routeList.data
-        .firstWhere((element) => element.name == widget.selectedRoute);
+    routeProvider = Provider.of<RouteProvider>(context, listen: false);
+    route = routeProvider.routeList
+        .firstWhere((element) => element.uid == widget.selectedRoute);
+    // route = routeList.data
+    //     .firstWhere((element) => element.name == widget.selectedRoute);
     getLocationUpdates()
         .then((_) => {generatePolylineFromPoints(route.polylinePoints)});
     bitmapDescriptorFromSvgAsset('asset/images/start_marker.svg')
@@ -234,7 +241,7 @@ class _RunPageState extends State<RunPage> {
                         color: Color(0xFF262626),
                         onPressed: () {
                           if (isPause) {
-                            onStop();
+                            onStop(true);
                           } else {
                             setState(() {
                               isPause = !isPause;
@@ -291,31 +298,27 @@ class _RunPageState extends State<RunPage> {
     // if (distanceToEnd <= 10) {
     //   onStop();
     // }
-    onStop();
+    onStop(false);
   }
 
-  void onStop() {
+  Future<void> onStop(bool forceStop) async {
     // final data = RunSummary(
     //   pace: pace,
     //   distance: _totalDistance,
     //   time: _stopWatchTimer.rawTime.value,
     // );
     final data = RunSummary(
-      pace: 10.52,
+      pace: 10.00,
       distance: 1401,
       time: 650000,
+      route: widget.selectedRoute!,
+      uid: FirebaseAuth.instance.currentUser!.uid,
+      forceStop: false,
+      timestamp: Timestamp.now(),
+      // forceStop: forceStop,
     );
 
-    context.goNamed(
-      // context.pushNamed(
-      'RunSummary',
-      queryParameters: {
-        'selectedRoute': widget.selectedRoute,
-        // 'isHideNavigationBar': true,
-        'backRoute': '/',
-      },
-      extra: data,
-    );
+    await routeProvider.onFinished(context, data);
   }
 
   Future<void> getLocationUpdates() async {
@@ -339,7 +342,6 @@ class _RunPageState extends State<RunPage> {
     }
 
     locationController.onLocationChanged.listen((LocationData currentLocation) {
-      // onReachEndPosition(currentLocation);
       if (currentLocation.latitude != null &&
           currentLocation.longitude != null) {
         setState(() {
@@ -368,7 +370,7 @@ class _RunPageState extends State<RunPage> {
             currentLocation.latitude!,
             currentLocation.longitude!,
           );
-          // onReachEndPosition(currentLocation);
+          // onReachEndPosition(currentLocation); // calculate here
         });
       }
     });

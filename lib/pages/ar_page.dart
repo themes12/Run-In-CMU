@@ -10,7 +10,11 @@ import '../components/navigation/app_bar.dart';
 import '../components/navigation/bottom_navigation_bar_custom.dart';
 
 class ARPage extends StatefulWidget {
-  ARPage({super.key});
+  const ARPage({
+    super.key,
+    required this.filter,
+  });
+  final String? filter;
 
   @override
   State<ARPage> createState() => _ARPageState();
@@ -19,14 +23,29 @@ class ARPage extends StatefulWidget {
 class _ARPageState extends State<ARPage> {
   final ScreenshotController screenshotController = ScreenshotController();
 
-  String cameraDirection ="User";
-
-  bool isNicetrySelected = true;
+  bool isNicetrySelected = false;
   bool isNormalSelected = false;
   bool isNewrecordSelected = false;
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    isNicetrySelected = widget.filter == "Nicetry";
+    isNormalSelected = widget.filter == "Normal";
+    isNewrecordSelected = widget.filter == "Newrecord";
+    print(widget.filter);
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    print(widget.filter);
     return Scaffold(
       backgroundColor: const Color(0xFF714DA5),
       floatingActionButton: Column(
@@ -55,23 +74,6 @@ class _ARPageState extends State<ARPage> {
               });
             },
           ),
-          SizedBox(height: 16), // Add some space between buttons
-          FloatingActionButton(
-            child: Icon(Icons.switch_camera),
-            onPressed: () {
-              if(cameraDirection =="User"){
-                cameraDirection = "World";
-              }else{
-                cameraDirection ="User";
-              }
-              // Send message to Unity to switch camera
-              sendToUnity(
-                "GameObject",
-                "ChangeScene",
-                cameraDirection,
-              );
-            },
-          ),
         ],
       ),
       body: Screenshot(
@@ -87,6 +89,7 @@ class _ARPageState extends State<ARPage> {
               } else if (isNewrecordSelected) {
                 selectedPrefabs = "newrecord";
               }
+              print("selectedPrefabs $selectedPrefabs");
               sendToUnity(
                 "GameObject",
                 "SetFaceFilterPrefabs",

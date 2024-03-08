@@ -123,7 +123,7 @@ class RouteListCard extends StatelessWidget {
                     'Map',
                     queryParameters: {
                       'backRoute': '/route-list',
-                      'selectedRoute': route.name,
+                      'selectedRoute': route.uid,
                     },
                   );
                 },

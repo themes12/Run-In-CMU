@@ -1,5 +1,6 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../components/home/home_stat_card.dart';
@@ -7,7 +8,6 @@ import '../components/home/total_stat_card.dart';
 import '../components/template/white_container.dart';
 import '../provider/navigation_bar_provider.dart';
 // Import the BestStatsCard widget
-
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -43,7 +43,7 @@ class HomePage extends StatelessWidget {
                       width: 10,
                     ),
                     Text(
-                      '9 February 2024',
+                      DateFormat("d MMMM y").format(DateTime.now()),
                       style: TextStyle(
                         color: Color(0xFF7A7A7A),
                         fontSize: 18,
@@ -66,7 +66,6 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                     // Add the BestStatsCard widget here
-
                   ],
                 ),
               ),
@@ -98,7 +97,6 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                     // Add the BestStatsCard widget here
-
                   ],
                 ),
               ),
