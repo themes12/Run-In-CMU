@@ -6,7 +6,6 @@ import 'package:location/location.dart';
 import 'package:provider/provider.dart';
 import 'package:runinmor/components/run/circular_button.dart';
 
-import 'package:runinmor/pages/count_down_page.dart';
 import 'package:runinmor/types/route_list.dart';
 
 import '../components/template/white_container.dart';

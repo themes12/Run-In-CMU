@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:runinmor/provider/auth_provider.dart';
-import 'package:sign_in_button/sign_in_button.dart';
 import 'package:provider/provider.dart';
 import 'package:runinmor/components/template/white_container.dart';
 

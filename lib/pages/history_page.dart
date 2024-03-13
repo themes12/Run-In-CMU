@@ -70,9 +70,9 @@ class HistoryAcivity extends StatelessWidget {
                                 distance:
                                     (route.distance / 1000).toStringAsFixed(2),
                                 pace: route.pace.toString(),
-                                time: DateFormat("d/M/y")
-                                    .format(route.timestamp.toDate()),
+                                time: DateFormat('mm:ss').format(DateTime.fromMillisecondsSinceEpoch(route.time)),
                                 imageUrl: route.img_url,
+                                timestamp: route.timestamp,
                               );
                             },
                             separatorBuilder:

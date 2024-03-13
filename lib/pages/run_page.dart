@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
@@ -35,6 +37,7 @@ class RunPage extends StatefulWidget {
 
 class _RunPageState extends State<RunPage> {
   Location locationController = Location();
+  late final StreamSubscription<LocationData> locationSubscription;
 
   mapTool.LatLng? prevLocation;
 
@@ -88,6 +91,7 @@ class _RunPageState extends State<RunPage> {
     // TODO: implement dispose
     super.dispose();
     await _stopWatchTimer.dispose();
+    locationSubscription.cancel();
   }
 
   @override
@@ -295,28 +299,32 @@ class _RunPageState extends State<RunPage> {
         route.endPosition.longitude,
       ),
     );
-    // if (distanceToEnd <= 10) {
-    //   onStop();
-    // }
-    onStop(false);
+    if (distanceToEnd <= 10) {
+      onStop(false);
+    }
+    // onStop(false);
   }
 
   Future<void> onStop(bool forceStop) async {
-    // final data = RunSummary(
-    //   pace: pace,
-    //   distance: _totalDistance,
-    //   time: _stopWatchTimer.rawTime.value,
-    // );
     final data = RunSummary(
-      pace: 10.00,
-      distance: 1401,
-      time: 650000,
+      pace: pace,
+      distance: _totalDistance,
+      time: _stopWatchTimer.rawTime.value,
       route: widget.selectedRoute!,
       uid: FirebaseAuth.instance.currentUser!.uid,
-      forceStop: false,
+      forceStop: forceStop,
       timestamp: Timestamp.now(),
-      // forceStop: forceStop,
     );
+    // final data = RunSummary(
+    //   pace: 10.00,
+    //   distance: 1401,
+    //   time: 650000,
+    //   route: widget.selectedRoute!,
+    //   uid: FirebaseAuth.instance.currentUser!.uid,
+    //   forceStop: false,
+    //   timestamp: Timestamp.now(),
+    //   // forceStop: forceStop,
+    // );
 
     await routeProvider.onFinished(context, data);
   }
@@ -341,7 +349,7 @@ class _RunPageState extends State<RunPage> {
       }
     }
 
-    locationController.onLocationChanged.listen((LocationData currentLocation) {
+    locationSubscription = locationController.onLocationChanged.listen((LocationData currentLocation) {
       if (currentLocation.latitude != null &&
           currentLocation.longitude != null) {
         setState(() {
@@ -370,7 +378,7 @@ class _RunPageState extends State<RunPage> {
             currentLocation.latitude!,
             currentLocation.longitude!,
           );
-          // onReachEndPosition(currentLocation); // calculate here
+          onReachEndPosition(currentLocation); // calculate here
         });
       }
     });

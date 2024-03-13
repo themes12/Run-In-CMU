@@ -29,7 +29,6 @@ class RouteProvider extends ChangeNotifier {
       );
       return _routeList;
     } catch (e) {
-      print("Error completing: $e");
       return null;
     }
   }
@@ -63,7 +62,6 @@ class RouteProvider extends ChangeNotifier {
       );
       return _historyList;
     } catch (e) {
-      print(e);
       return null;
     }
   }
@@ -81,6 +79,13 @@ class RouteProvider extends ChangeNotifier {
       },
     );
 
+    await _db.collection("users").doc(_auth.currentUser!.uid).update({
+      "total_distance": FieldValue.increment((runSummary.distance / 1000).toInt()),
+      "total_time": FieldValue.increment(DateTime.fromMillisecondsSinceEpoch(
+        runSummary.time,
+      ).minute),
+    });
+
     if (context.mounted) {
       context.goNamed(
         'RunSummary',
@@ -93,6 +98,39 @@ class RouteProvider extends ChangeNotifier {
     }
   }
 
+  Future<RunSummaryAdditional?> loadOverallBestStats() async {
+    try {
+      await loadRouteList();
+      final snapshot = await _db
+          .collection("histories")
+          .where("uid", isEqualTo: _auth.currentUser!.uid)
+          .orderBy("pace", descending: true)
+          .limit(1)
+          .get();
+      final route = routeList
+          .firstWhereOrNull((element) => element.uid == snapshot.docs[0].data()["route"]);
+      if(snapshot.docs.isEmpty) {
+        return null;
+      }
+      if (route != null) {
+        return RunSummaryAdditional.fromJson(
+          snapshot.docs[0].data(),
+          route.name,
+          route.imgUrl,
+        );
+      } else {
+        return RunSummaryAdditional.fromJson(
+          snapshot.docs[0].data(),
+          "Unknown Route",
+          "https://i.imgur.com/yIqluuS.png",
+        );
+      }
+    } catch (e) {
+      print(e);
+      return null;
+    }
+  }
+
   Future<RunSummary?> loadRouteBestStats(RunSummary runSummary) async {
     try {
       final snapshot = await _db
@@ -102,28 +140,31 @@ class RouteProvider extends ChangeNotifier {
           .orderBy("pace", descending: true)
           .limit(1)
           .get();
-      if (snapshot.docs.isEmpty) {
+      if(snapshot.docs.isEmpty) {
         return null;
       }
-      return RunSummary.fromJson(snapshot.docs.first.data());
+      return RunSummary.fromJson(snapshot.docs[0].data());
     } catch (e) {
-      print(e);
       return null;
     }
   }
 
   Future<void> calculateFilter(
       BuildContext context, RunSummary runSummary) async {
+    print("status ${runSummary.forceStop}");
     String filter = "";
     final bestStat = await loadRouteBestStats(runSummary);
+    print("bestStat ${bestStat!.pace} ${runSummary.pace}");
 
-    if (bestStat == null || runSummary.pace < bestStat.pace) {
+    if (bestStat == null || runSummary.pace > bestStat.pace) {
       filter = "Newrecord";
-    } else if (runSummary.pace > bestStat.pace || runSummary.forceStop) {
+    } else if (runSummary.pace < bestStat.pace || runSummary.forceStop) {
       filter = "Nicetry";
     } else if (runSummary.pace == bestStat.pace) {
       filter = "Normal";
     }
+
+    print("fiiler $filter");
 
     if (context.mounted) {
       context.goNamed(

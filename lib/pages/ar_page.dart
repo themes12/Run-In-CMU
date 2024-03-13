@@ -3,11 +3,8 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_embed_unity/flutter_embed_unity.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
-import 'package:runinmor/components/template/white_container.dart';
 import 'package:screenshot/screenshot.dart';
 
-import '../components/navigation/app_bar.dart';
-import '../components/navigation/bottom_navigation_bar_custom.dart';
 
 class ARPage extends StatefulWidget {
   const ARPage({
@@ -21,6 +18,7 @@ class ARPage extends StatefulWidget {
 }
 
 class _ARPageState extends State<ARPage> {
+  String selectedPrefabs = "";
   final ScreenshotController screenshotController = ScreenshotController();
 
   bool isNicetrySelected = false;
@@ -34,7 +32,25 @@ class _ARPageState extends State<ARPage> {
     isNicetrySelected = widget.filter == "Nicetry";
     isNormalSelected = widget.filter == "Normal";
     isNewrecordSelected = widget.filter == "Newrecord";
-    print(widget.filter);
+    if (isNicetrySelected) {
+      setState(() {
+        selectedPrefabs = "nicetry";
+      });
+    } else if (isNormalSelected) {
+      setState(() {
+        selectedPrefabs = "normal";
+      });
+    } else if (isNewrecordSelected) {
+      setState(() {
+        selectedPrefabs = "newrecord";
+      });
+    }
+    print("selectedPrefabs $selectedPrefabs");
+    sendToUnity(
+      "GameObject",
+      "SetFaceFilterPrefabs",
+      selectedPrefabs,
+    );
   }
 
   @override
@@ -81,13 +97,18 @@ class _ARPageState extends State<ARPage> {
         child: EmbedUnity(
           onMessageFromUnity: (String message) {
             if (message == "scene_loaded") {
-              String selectedPrefabs = "";
               if (isNicetrySelected) {
-                selectedPrefabs = "nicetry";
+                setState(() {
+                  selectedPrefabs = "nicetry";
+                });
               } else if (isNormalSelected) {
-                selectedPrefabs = "normal";
+                setState(() {
+                  selectedPrefabs = "normal";
+                });
               } else if (isNewrecordSelected) {
-                selectedPrefabs = "newrecord";
+                setState(() {
+                  selectedPrefabs = "newrecord";
+                });
               }
               print("selectedPrefabs $selectedPrefabs");
               sendToUnity(

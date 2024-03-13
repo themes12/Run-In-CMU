@@ -20,7 +20,6 @@ class AuthProvider extends ChangeNotifier {
       GoogleAuthProvider _googleAuthProvider = GoogleAuthProvider();
       _auth.signInWithProvider(_googleAuthProvider);
     } catch (error) {
-      print(error);
     }
   }
 }

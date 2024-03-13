@@ -44,7 +44,7 @@ class RunSummary {
         time: json["time"],
         route: json["route"],
         uid: json["uid"],
-        forceStop: json["forceStop"],
+        forceStop: json["forceStop"] == "true" ? true : false,
         timestamp: json["timestamp"],
       );
 }

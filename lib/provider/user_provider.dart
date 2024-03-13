@@ -23,7 +23,6 @@ class UserProvider extends ChangeNotifier {
       notifyListeners();
       return data;
     } catch (e) {
-      print("Error getting document: $e");
       notifyListeners();
       return null;
     }
@@ -32,6 +31,8 @@ class UserProvider extends ChangeNotifier {
   Future<void> setUsername(String username) async {
     final data = {
       "name": username,
+      "total_distance": 0,
+      "total_time": 0,
     };
     final users = _db.collection("users");
     final doc = await users.doc(_auth.currentUser?.uid).set(

@@ -1,11 +1,10 @@
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-import 'package:go_router/go_router.dart';
-import 'package:runinmor/types/route_list.dart';
+import 'package:intl/intl.dart';
 
 class BestStatsCard extends StatelessWidget {
   final String name;
@@ -13,6 +12,7 @@ class BestStatsCard extends StatelessWidget {
   final String pace;
   final String time;
   final String imageUrl;
+  final Timestamp timestamp;
 
   const BestStatsCard({
     Key? key,
@@ -21,6 +21,7 @@ class BestStatsCard extends StatelessWidget {
     required this.pace,
     required this.time,
     required this.imageUrl,
+    required this.timestamp,
   }) : super(key: key);
 
   @override
@@ -73,25 +74,32 @@ class BestStatsCard extends StatelessWidget {
                       ),
                     ),
                     
-                  Column(
-                    children: [
-                      Text(
-                        '13/11/2024',
-                        style: const TextStyle(
-                          color: Color(0xFF262626),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                        ),
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 5,),
+                      child: Column(
+                        children: [
+                          Text(
+                            DateFormat.yMd().format(timestamp.toDate()),
+                            style: const TextStyle(
+                              color: Color(0xFF262626),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
+                          ),
+                          Text(
+                            name,
+                            style: const TextStyle(
+                              color: Color(0xFF7A7A7A),
+                              fontWeight: FontWeight.normal,
+                              fontSize: 18,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            maxLines: 2,
+                          ),
+                        ],
                       ),
-                      Text(
-                        name,
-                        style: const TextStyle(
-                          color: Color(0xFF7A7A7A),
-                          fontWeight: FontWeight.normal,
-                          fontSize: 18,
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                   const SizedBox(height: 8),
                 ]
@@ -162,7 +170,7 @@ class BestStatsCard extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          'Time',
+                          'Time (Minutes)',
                           style: const TextStyle(
                             color: Color(0xFF17A7A7A),
                             fontWeight: FontWeight.normal,
