@@ -1,16 +1,17 @@
-# runinmor
 
-วิ่งในมอ
+# วิ่งในมอ
+โปรเจค Fluter
+## Prerequisite
+1.unity project ``https://github.com/phanukorn222/ARFilter-Run-in-mor``  
 
-## Getting Started
+And you're good to go!
+## How to run
 
-This project is a starting point for a Flutter application.
+1.Clone or download unity project
 
-A few resources to get you started if this is your first Flutter project:
+```bash
+  git clone https://github.com/phanukorn222/ARFilter-Run-in-mor
+```
+จากนั้นทำตาม readme ใน ARFilter-Run-in-mor ก่อน หลังจาก export unity project แล้วให้ทำขั้นตอนถัดไป
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+2.run flutter project ได้เลย อาจจะใช้เวลาประมาณ 3-20 นาที (แล้วแต่ความแรงของเครื่อง)
