@@ -1,3 +1,6 @@
+/// ปัทมาพร ถาเป็นบุญ 640510668
+/// The home page shows the running date, best stat and total stat information.
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
