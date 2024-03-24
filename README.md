@@ -1,13 +1,16 @@
 
 # วิ่งในมอ
-โปรเจค Fluter
+โปรเจคนี้ถูก Design โดย ปัทมาพร ถาเป็นบุญ 640510668  
+``https://www.figma.com/file/ixXrd7pmieD5A9LdWRAwhE/Run-Nai-Mor?type=design&node-id=0%3A1&mode=design&t=ajXdfnARmTR2XO2D-1``  
+ฝั่ง AR โดย ภานุกร คุ้มสลุด 640510627   
+ฝั่ง Flutter (ส่วนใหญ่) โดย ธิติ พุฒธาอามาตย์ 640510660  
+
 ## Prerequisite
 1.unity project ``https://github.com/phanukorn222/ARFilter-Run-in-mor``  
 
-And you're good to go!
 ## How to run
 
-1.Clone or download unity project
+1.Clone หรือ download unity project
 
 ```bash
   git clone https://github.com/phanukorn222/ARFilter-Run-in-mor
