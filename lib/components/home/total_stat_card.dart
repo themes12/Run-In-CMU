@@ -1,3 +1,7 @@
+/// ปัทมาพร ถาเป็นบุญ 640510668
+/// Component of total stats on the main page that shows distance traveled,
+/// Average pace that can be run and total running hours
+
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
