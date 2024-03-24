@@ -1,36 +1,9 @@
+/// Generated from Quicktype
+/// Edited by Thiti Phuttaamart 640510660
 import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
-
-// class RunRouteList {
-//   final List<RunRoute> data;
-//
-//   RunRouteList({
-//     required this.data,
-//   });
-//
-//   RunRouteList copyWith({
-//     List<RunRoute>? data,
-//   }) =>
-//       RunRouteList(
-//         data: data ?? this.data,
-//       );
-//
-//   factory RunRouteList.fromRawJson(String str) =>
-//       RunRouteList.fromJson(json.decode(str));
-//
-//   String toRawJson() => json.encode(toJson());
-//
-//   factory RunRouteList.fromJson(Map<String, dynamic> json) => RunRouteList(
-//         data:
-//             List<RunRoute>.from(json["data"].map((x) => RunRoute.fromJson(x))),
-//       );
-//
-//   Map<String, dynamic> toJson() => {
-//         "data": List<dynamic>.from(data.map((x) => x.toJson())),
-//       };
-// }
 
 class RunRoute {
   final String name;

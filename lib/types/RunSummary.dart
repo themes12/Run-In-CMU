@@ -1,3 +1,5 @@
+/// Generated from Quicktype
+/// Edited by Thiti Phuttaamart 640510660
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class RunSummary {
